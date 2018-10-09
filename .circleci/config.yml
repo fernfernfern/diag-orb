@@ -70,7 +70,7 @@ jobs:
     executor: node
     steps:
       - orb-commands
-      
+
 workflows:
   orb-flow:
     jobs:
@@ -80,13 +80,11 @@ workflows:
           post-steps:
             - diag/end
       - test-ruby:
-          image: python
           pre-steps:
             - diag/start
           post-steps:
             - diag/end
-      - test-report:
-          image: node
+      - test-node:
           pre-steps:
             - diag/start
           post-steps:
