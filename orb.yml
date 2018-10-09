@@ -27,35 +27,4 @@ commands:
             path: << parameters.data-dir >>
             destination: ccidiag
 
-  # WIP - Start up metricbeat in each job to track resource usage over time
-  # and view the logs in Kibana
 
-  # How to try: Sign up for a frefZe elastic stack cloud trial at https://www.elastic.co/cloud
-  # After signup you will be given a username, password, and cloud ID. 
-  # Save these values as enviroment variables in the UI named: ES_USER, ES_PASSWORD, ES_ID
-  # Run the orb as the start your job - diag/metricbeat
-  metricbeat:
-    description: "Run Metricbeat at the start of a job and save the data in an elastic stack instance"
-      
-    parameters:
-      data-dir:
-        type: string
-        default: "~/.mb"
-    steps:
-      - restore_cache:
-          keys:
-            - v1-metricbeat-6.3.2-linux-x86_64
-
-      - run: |
-            mkdir -p << parameters.data-dir >>
-            wget -c -nc -O << parameters.data-dir >>/metricbeat.tar.gz https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.3.2-linux-x86_64.tar.gz || true
-            tar xzvf << parameters.data-dir>>/metricbeat.tar.gz -C << parameters.data-dir >> --strip-components=1
-      - save_cache:
-          key: v1-metricbeat-6.3.2-linux-x86_64
-          paths:
-            - '~/.mb'
-      - run:
-          background: true
-          command: |
-            chmod +x << parameters.data-dir >>/metricbeat
-            << parameters.data-dir >>/metricbeat -e -E cloud.id="${ES_ID}" -E cloud.auth="${ES_USER}:${ES_PASSWORD}" -c << parameters.data-dir >>/metricbeat.yml
