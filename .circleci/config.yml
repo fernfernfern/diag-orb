@@ -31,26 +31,60 @@ orbs:
                 path: << parameters.data-dir >>
                 destination: ccidiag
       start:
+        description: steps to be run during the 'pre-steps' of a job
         steps:
           - run: echo "diag start"
       end:
+        description: steps to be run during the 'post-steps' of a job
         steps:
           - run: echo "diag end"
 executors:
-  default:
+  python:
     docker:
       - image: circleci/python
+  node:
+    docker:
+      - image: circleci/node
+  ruby:
+    docker:
+      - image: circleci/ruby
+  macos:
+    macos:
+      xcode: 9.0
+
+commands:
+  orb-commands:
+    steps:
+      - diag/report
 
 jobs:
   test-report:
-    executor: default
+    parameters:
+      image:
+        description: name of image
+        default: python
+        type: string
+    executor: << parameters.image >>
     steps:
-      - diag/report
+      - orb-commands
 
 workflows:
   orb-flow:
     jobs:
       - test-report:
+          image: ruby
+          pre-steps:
+            - diag/start
+          post-steps:
+            - diag/end
+      - test-report:
+          image: python
+          pre-steps:
+            - diag/start
+          post-steps:
+            - diag/end
+      - test-report:
+          image: node
           pre-steps:
             - diag/start
           post-steps:
