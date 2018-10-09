@@ -30,12 +30,12 @@ orbs:
           - store_artifacts:
                 path: << parameters.data-dir >>
                 destination: ccidiag
-        start:
-          steps:
-            - run: echo "diag start"
-        end:
-          steps:
-            - run: echo "diag end"
+      start:
+        steps:
+          - run: echo "diag start"
+      end:
+        steps:
+          - run: echo "diag end"
 executors:
   default:
     docker:
