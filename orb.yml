@@ -10,6 +10,7 @@ commands:
         type: string
         default: "~/.ccidiag"
     steps:
+      - run: pwd
       - run: 
           name: CircleCI Diag Report
           # This will run through various commands dumping their output as a file to be uploaded as 
