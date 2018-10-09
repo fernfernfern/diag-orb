@@ -58,26 +58,28 @@ commands:
       - diag/report
 
 jobs:
-  test-report:
-    parameters:
-      image:
-        description: name of image
-        default: python
-        type: string
-    executor: << parameters.image >>
+  test-ruby:
+    executor: ruby
     steps:
       - orb-commands
-
+  test-python:
+    executor: python
+    steps:
+      - orb-commands
+  test-node:
+    executor: node
+    steps:
+      - orb-commands
+      
 workflows:
   orb-flow:
     jobs:
-      - test-report:
-          image: ruby
+      - test-python:
           pre-steps:
             - diag/start
           post-steps:
             - diag/end
-      - test-report:
+      - test-ruby:
           image: python
           pre-steps:
             - diag/start
