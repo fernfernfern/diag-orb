@@ -13,6 +13,5 @@ jobs:
     executor: default
     steps:
       - diag/report
-      - diag/create-sample-data:
-          upload: true
+      - diag/create-sample-data
 
