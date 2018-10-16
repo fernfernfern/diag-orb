@@ -16,7 +16,7 @@ jobs:
           path: packed.yml
           destination: orb
       - run: circleci orb validate packed.yml
-      - run: circleci diagnostic
+      - run: circleci orb publish packed.yml fernfernfern/diag-orb@dev:volatile--token ${CLI_TOKEN}
   orb-test:
     executor: default
     steps:
