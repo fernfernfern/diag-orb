@@ -1,91 +1,20 @@
 version: 2.1
 
-orbs:
-  diag:
-    description: "If you're running this bad things happened"
-    commands:
-      report:
-        description: "Save information about the job enviroment as artifacts to inspect later"
-        parameters:
-          data-dir:
-            type: string
-            default: "~/.ccidiag"
-        steps:
-          - run: 
-              name: CircleCI Diag Report
-              # This will run through various commands dumping their output as a file to be uploaded as 
-              # an artifact. If the command doesn't exist the file will be empty, and CircleCI will ignore
-              # it during the upload. Can be used to discover enviromental information and installed packages
-              command: |
-                mkdir << parameters.data-dir >> || true
-                cat /proc/cpuinfo > << parameters.data-dir >>/proc_cpuinfo.log || true
-                dpkg -l > << parameters.data-dir >>/dpkg.log || true
-                yarn list > << parameters.data-dir >>/yarn.log || true
-                brew list --versions > << parameters.data-dir >>/brew.log || true
-                yarn global list > << parameters.data-dir >>/yarn-global.log || true
-                gem query --local > << parameters.data-dir >>/gem.log || true
-                npm --version || true
-                npm ls --global > << parameters.data-dir >>/npm-global.log || true
-                npm ls > << parameters.data-dir >>/npm.log || true
-          - store_artifacts:
-                path: << parameters.data-dir >>
-                destination: ccidiag
-      start:
-        description: steps to be run during the 'pre-steps' of a job
-        steps:
-          - run: echo "diag start"
-      end:
-        description: steps to be run during the 'post-steps' of a job
-        steps:
-          - run: echo "diag end"
 executors:
-  python:
+  default:
     docker:
       - image: circleci/python
-  node:
-    docker:
-      - image: circleci/node
-  ruby:
-    docker:
-      - image: circleci/ruby
-  macos:
-    macos:
-      xcode: 9.0
-
-commands:
-  orb-commands:
-    steps:
-      - diag/report
 
 jobs:
-  test-ruby:
-    executor: ruby
+  orb-build:
+    executor: default
     steps:
-      - orb-commands
-  test-python:
-    executor: python
-    steps:
-      - orb-commands
-  test-node:
-    executor: node
-    steps:
-      - orb-commands
+      - run: bash -c "$(curl -fSl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh)"
+      - checkout
+      - run: circleci orb pack orb > packed.yml
+      - run: circleci orb validate packed.yml
 
 workflows:
-  orb-flow:
+  daig-orb:
     jobs:
-      - test-python:
-          pre-steps:
-            - diag/start
-          post-steps:
-            - diag/end
-      - test-ruby:
-          pre-steps:
-            - diag/start
-          post-steps:
-            - diag/end
-      - test-node:
-          pre-steps:
-            - diag/start
-          post-steps:
-            - diag/end
+      - orb-build
