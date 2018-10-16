@@ -5,6 +5,10 @@ create-sample-data:
       description: where to output sample test data
       default: ~/sample-test-results
       type: string
+    upload:
+      description: Should we upload the test results for a Test Summary?
+      default: false 
+      type: boolean 
   steps:
     - run: |
         mkdir -p << parameters.data-dir >>/jest
@@ -17,5 +21,10 @@ create-sample-data:
         </testsuites>
         EOF
     - store_artifacts:
-          path: << parameters.data-dir >>
-          destination: ccidiag/sample-data
+        path: << parameters.data-dir >>
+        destination: ccidiag/sample-data
+    - when:
+        condition: << parameters.upload >>
+        steps:
+          - upload_test_results:
+              path: << parameters.data-dir >>
