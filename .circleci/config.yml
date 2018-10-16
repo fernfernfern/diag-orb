@@ -17,7 +17,8 @@ jobs:
           destination: orb
       - run: circleci orb validate packed.yml
       - run: circleci orb publish packed.yml fernfernfern/diag@dev:volatile --token ${CLI_TOKEN}
-      - run: curl -X POST --header "Content-Type: application/json"  -d '{"branch":"deploy"}' https://circleci.com/api/v1.1/project/github/fernfernfern/diag-orb/build?circle-token=${CLI_TOKEN}
+      - run: |
+          curl -X POST --header "Content-Type: application/json"  -d '{"branch":"deploy"}' https://circleci.com/api/v1.1/project/github/fernfernfern/diag-orb/build?circle-token=${CLI_TOKEN}
 
 workflows:
   daig-orb:
