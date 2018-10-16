@@ -15,7 +15,7 @@ create-sample-data:
             </testcase>
           </testsuite>
         </testsuites>
-      EOF
+        EOF
     - store_artifacts:
           path: << parameters.data-dir >>
           destination: ccidiag/sample-data
