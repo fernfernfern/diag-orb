@@ -6,7 +6,7 @@ executors:
       - image: circleci/python
 
 jobs:
-  orb-build:
+  orb-build-test:
     executor: default
     steps:
       - run: sudo bash -c "$(curl -fSl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh)"
@@ -23,7 +23,4 @@ jobs:
 workflows:
   daig-orb:
     jobs:
-      - orb-build
-      - orb-test:
-          requires: 
-            - orb-build
+      - orb-build-test
