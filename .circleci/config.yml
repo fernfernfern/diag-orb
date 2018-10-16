@@ -18,10 +18,14 @@ jobs:
       - run: circleci orb validate packed.yml
       - run: circleci setup --token $CLI_TOKEN --host https://circleci.com
   orb-test:
+    executor: default
+    steps:
+      - run: echo test
 
 workflows:
   daig-orb:
     jobs:
       - orb-build
       - orb-test:
-          requires: orb-build
+          requires: 
+            - orb-build
