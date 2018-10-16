@@ -13,3 +13,4 @@ jobs:
     executor: default
     steps:
       - diag/report
+      - diag/create-sample-data
