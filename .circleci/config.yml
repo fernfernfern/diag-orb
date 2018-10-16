@@ -17,7 +17,7 @@ jobs:
           destination: orb
       - run: circleci orb validate packed.yml
       - run: circleci orb publish packed.yml fernfernfern/diag@dev:volatile --token ${CLI_TOKEN}
-      - run: circleci config process > orb_test_config.yml
+      - run: circleci config process .circleci/orb_test_config.yml > orb_test_config.yml
       - run: |
           curl --user ${CLI_TOKEN}: \
             --request POST \
