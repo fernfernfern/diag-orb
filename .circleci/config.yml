@@ -17,11 +17,11 @@ jobs:
           destination: orb
       - run: circleci orb validate packed.yml
       - run: circleci orb publish packed.yml fernfernfern/diag@dev:volatile --token ${CLI_TOKEN}
-      - run: circleci config process .circleci/orb_test_config.yml > orb_test_config.yml
+      - run: circleci config process .circleci/test.orb.yml > test.orb.yml
       - run: |
           curl --user ${CLI_TOKEN}: \
             --request POST \
-            --form config=@orb_test_config.yml \
+            --form config=@test.orb.yml \
             --form notify=false \
               https://circleci.com/api/v1.1/project/github/fernfernfern/diag-orb/tree/master
 workflows:
