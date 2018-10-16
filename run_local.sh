@@ -19,6 +19,7 @@ jobs:
       - diag/create-sample-data
 EOL
 
-circleci config pack orb > local/orbs/diag.yml
-circleci config pack local > packed.yml
-circleci config process packed.yml > processed.yml
+circleci config pack orb > local/orbs/diag.yml || exit
+circleci config pack local > packed.yml || exit
+circleci config process packed.yml > processed.yml || exit
+circleci build -c processed.yml
