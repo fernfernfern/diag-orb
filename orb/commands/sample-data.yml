@@ -7,10 +7,4 @@ parameters:
 
 steps:
   - run: |
-      cat > << parameters.data-dir >> <<EOL
-      <testsuites name="jest tests">
-        <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2018-05-16T22:26:25" time="4.21" tests="1">
-          <testcase classname=" renders without crashing" name=" renders without crashing" time="2.879">
-          </testcase>
-        </testsuite>
-      </testsuites>
+      echo temp
