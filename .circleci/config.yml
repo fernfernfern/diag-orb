@@ -12,6 +12,8 @@ jobs:
       - run: sudo bash -c "$(curl -fSl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh)"
       - checkout
       - run: circleci orb pack orb > packed.yml
+      - store_artifacts:
+          path: packed.yml
       - run: circleci orb validate packed.yml
 
 workflows:
