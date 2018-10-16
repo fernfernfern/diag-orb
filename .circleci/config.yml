@@ -16,7 +16,7 @@ jobs:
           path: packed.yml
           destination: orb
       - run: circleci orb validate packed.yml
-      - run: circleci setup --token $CLI_TOKEN --host https://circleci.com
+      - run: circleci diagnostic
   orb-test:
     executor: default
     steps:
