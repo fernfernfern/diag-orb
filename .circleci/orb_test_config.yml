@@ -1,0 +1,15 @@
+version: 2.1
+
+orbs:
+  diag: fernfernfern/diag@dev:volatile
+
+executors:
+  default:
+    docker:
+      - image: circleci/python
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - diag/report
