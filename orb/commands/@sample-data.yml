@@ -26,5 +26,5 @@ create-sample-data:
     - when:
         condition: << parameters.upload >>
         steps:
-          - upload_test_results:
+          - store_test_results:
               path: << parameters.data-dir >>
