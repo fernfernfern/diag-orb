@@ -1,4 +1,4 @@
-report:
+env-report:
   description: "Save information about the job enviroment as artifacts to inspect later"
   parameters:
     data-dir:
