@@ -3,5 +3,5 @@ record-top:
     - run: 
         command: |
           mkdir -p ~/.ccidiag/memory
-          top -Hcb \>> ~/.ccidiag/memory/top.txt || true
+          top -cb \>> ~/.ccidiag/memory/top.txt || true
         background: true
