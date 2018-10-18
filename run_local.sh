@@ -15,8 +15,17 @@ jobs:
   build:
     executor: default
     steps:
-      - diag/report
-      - diag/create-sample-data
+      - run: echo lol
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          pre-steps:
+            - diag/create-sample-data:
+                upload: true
+          post-steps:
+            - diag/post-steps
 EOL
 
 circleci config pack orb > local/orbs/diag.yml || exit

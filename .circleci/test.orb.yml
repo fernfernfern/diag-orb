@@ -12,7 +12,14 @@ jobs:
   build:
     executor: default
     steps:
-      - diag/env-report
-      - diag/create-sample-data:
-          upload: true
+      - run: echo lol
 
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          pre-steps:
+            - diag/create-sample-data:
+                upload: true
+          post-stops:
+            - diag/post-steps
