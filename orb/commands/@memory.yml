@@ -1,5 +1,7 @@
 record-top:
   steps:
     - run: 
-        command: top -Hcb \>> ~/.ccidiag/memory/top.txt || true
+        command: |
+          mkdir ~/.ccidiag/memory
+          top -Hcb \>> ~/.ccidiag/memory/top.txt || true
         background: true
