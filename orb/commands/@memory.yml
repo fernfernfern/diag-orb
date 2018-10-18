@@ -1,0 +1,4 @@
+record-top:
+  steps:
+    - run: top -Hcb \>> ~/.ccidiag/memory/top.txt || true
+      background: true
