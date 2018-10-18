@@ -21,5 +21,5 @@ workflows:
           pre-steps:
             - diag/create-sample-data:
                 upload: true
-          post-stops:
+          post-steps:
             - diag/post-steps
