@@ -12,7 +12,7 @@ jobs:
   build:
     executor: default
     steps:
-      - diag/report
+      - diag/env-report
       - diag/create-sample-data:
           upload: true
 
