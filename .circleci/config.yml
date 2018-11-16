@@ -9,7 +9,7 @@ jobs:
   orb-build-test:
     executor: default
     steps:
-      - run: sudo curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash)
+      - run: sudo curl -fLSs https://circle.ci/cli | bash
       - checkout
       - run: circleci config pack orb | tee packed.yml
       - store_artifacts:
