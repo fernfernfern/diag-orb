@@ -6,6 +6,6 @@ record-top:
   steps:
     - run: 
         command: |
-          mkdir -p ~/<< parameters.data-dir >>
-          top -cb \>> ~/<< parameters.data-dir >>/top.txt || true
+          mkdir -p << parameters.data-dir >>
+          top -cb \>> << parameters.data-dir >>/top.txt || true
         background: true
