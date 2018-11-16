@@ -42,11 +42,11 @@ workflows:
   my-workflow:
     jobs:
       - build:
-          <<: *tests
+        <<: *tests
       - build:
           executor: machine
-          <<: *tests
+        <<: *tests
       - build:
           executor: macos
-          <<: *tests
+        <<: *tests
 
