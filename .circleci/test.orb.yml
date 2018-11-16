@@ -38,5 +38,5 @@ workflows:
             - diag/env-report
             - diag/record-top
           post-steps:
-            - daig/post-steps
+            - diag/post-steps
 
