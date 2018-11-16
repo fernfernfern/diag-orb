@@ -22,7 +22,7 @@ workflows:
     jobs:
       - build:
           pre-steps:
-            - diag/create-sample-data:
+            - diag/sample-test-data:
                 upload: true
           post-steps:
             - diag/post-steps

@@ -35,8 +35,8 @@ workflows:
     jobs:
       - build:
           pre-steps:
-            - diag/sample-test-data
+            - diag/env-report
             - diag/record-top
           post-steps:
-            - diag/post-steps
+            - daig/post-steps
 
