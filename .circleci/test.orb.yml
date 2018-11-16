@@ -30,23 +30,13 @@ jobs:
     steps:
       - run: sleep 10
 
-tests: &tests
-  pre-steps:
-    - diag/sample-test-data
-    - diag/record-top
-  post-steps:
-    - diag/post-steps
-
 workflows:
-  version: 2
   my-workflow:
     jobs:
       - build:
-        <<: *tests
-      - build:
-          executor: machine
-        <<: *tests
-      - build:
-          executor: macos
-        <<: *tests
+          pre-steps:
+            - diag/sample-test-data
+            - diag/record-top
+          post-steps:
+            - diag/post-steps
 
