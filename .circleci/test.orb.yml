@@ -4,13 +4,29 @@ orbs:
   diag: fernfernfern/diag@dev:volatile
 
 executors:
-  default:
+  docker:
+    parameters:
+      image:
+        type: string
+        default: python
+      tag:
+        type: string
+        default: latest
     docker:
-      - image: circleci/python
+      - image: circleci/<< parameters.image >>:<< parameters.tag >>
+  macos:
+    macos:
+      xcode: "10.1.0"
+  machine:
+    machine: true
 
 jobs:
   build:
-    executor: default
+    parameters:
+      executor:
+        type: string
+        default: docker
+    executor: << parameters.executor >>
     steps:
       - run: sleep 10
 
@@ -24,3 +40,18 @@ workflows:
             - diag/record-top
           post-steps:
             - diag/post-steps
+      - build:
+          executor: machine
+          pre-steps:
+            - diag/create-sample-data
+            - diag/record-top
+          post-steps:
+            - diag/post-steps
+      - build:
+          executor: macos
+          pre-steps:
+            - diag/create-sample-data
+            - diag/record-top
+          post-steps:
+            - diag/post-steps
+
