@@ -12,7 +12,7 @@ env-report:
         # an artifact. If the command doesn't exist the file will be empty, and CircleCI will ignore
         # it during the upload. Can be used to discover enviromental information and installed packages
         command: |
-          mkdir << parameters.data-dir >> || true
+          mkdir -p << parameters.data-dir >> || true
           cat /proc/cpuinfo > << parameters.data-dir >>/proc_cpuinfo.log || true
           dpkg -l > << parameters.data-dir >>/dpkg.log || true
           yarn list > << parameters.data-dir >>/yarn.log || true
