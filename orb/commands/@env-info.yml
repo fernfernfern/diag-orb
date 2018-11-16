@@ -3,7 +3,7 @@ env-report:
   parameters:
     data-dir:
       type: string
-      default: "~/.ccidiag"
+      default: "~/.ccidiag/env-report"
   steps:
     - run: pwd
     - run: 
