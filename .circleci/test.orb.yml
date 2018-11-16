@@ -15,12 +15,12 @@ jobs:
       - run: sleep 10
 
 workflows:
+  version: 2
   my-workflow:
     jobs:
       - build:
           pre-steps:
-            - diag/create-sample-data:
-                upload: true
+            - diag/create-sample-data
             - diag/record-top
           post-steps:
             - diag/post-steps

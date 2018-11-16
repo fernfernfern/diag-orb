@@ -9,7 +9,7 @@ jobs:
   orb-build-test:
     executor: default
     steps:
-      - run: sudo bash -c "$(curl -fSl https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh)"
+      - run: sudo curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash)
       - checkout
       - run: circleci config pack orb | tee packed.yml
       - store_artifacts:

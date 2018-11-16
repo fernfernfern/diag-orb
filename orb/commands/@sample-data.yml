@@ -1,9 +1,9 @@
 
-create-sample-data:
+sample-test-data:
   parameters:
     data-dir:
       description: where to output sample test data
-      default: ~/sample-test-results
+      default: ~/.ccidiag/sample-test-results
       type: string
     upload:
       description: Should we upload the test results for a Test Summary?
