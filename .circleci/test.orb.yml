@@ -30,28 +30,23 @@ jobs:
     steps:
       - run: sleep 10
 
+tests: &tests
+  pre-steps:
+    - diag/sample-test-data
+    - diag/record-top
+  post-steps:
+    - diag/post-steps
+
 workflows:
   version: 2
   my-workflow:
     jobs:
       - build:
-          pre-steps:
-            - diag/create-sample-data
-            - diag/record-top
-          post-steps:
-            - diag/post-steps
+          <<: *tests
       - build:
           executor: machine
-          pre-steps:
-            - diag/create-sample-data
-            - diag/record-top
-          post-steps:
-            - diag/post-steps
+          <<: *tests
       - build:
           executor: macos
-          pre-steps:
-            - diag/create-sample-data
-            - diag/record-top
-          post-steps:
-            - diag/post-steps
+          <<: *tests
 
