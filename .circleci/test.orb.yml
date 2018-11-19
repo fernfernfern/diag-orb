@@ -37,7 +37,7 @@ workflows:
           pre-steps:
             - diag/env-report
             - diag/record-top
-            - diag/sample-test-data
+            - diag/sample-cache-data
           post-steps:
             - diag/post-steps
 

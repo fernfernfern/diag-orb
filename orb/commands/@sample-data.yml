@@ -50,3 +50,20 @@ sample-test-data:
         steps:
           - store_test_results:
               path: << parameters.data-dir >>
+test-cache-data:
+  parameters:
+    data-dir:
+      description: where to output sample test data
+      default: ~/.ccidiag/cache
+      type: string
+    cache-param:
+      default: testing
+      type: string
+    key:
+      description: what is the cache key?
+      type: string
+      default: -v1-<< parameters.cache-param >>-{{ arch }}
+  steps:
+    - save-cache:
+        key: << parameters.key >>
+        path: << parameters.data-dir>>
