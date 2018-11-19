@@ -64,6 +64,6 @@ test-cache-data:
       type: string
       default: -v1-<< parameters.cache-param >>-{{ arch }}
   steps:
-    - save-cache:
+    - save_cache:
         key: << parameters.key >>
         path: << parameters.data-dir>>
