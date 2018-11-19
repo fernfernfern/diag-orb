@@ -7,11 +7,7 @@ sim-cache:
     cache-param:
       default: testing
       type: string
-    key:
-      description: what is the cache key?
-      type: string
-      default: -v1-<< parameters.cache-param >>-{{ arch }}
   steps:
     - save_cache:
-        key: << parameters.key >>
+        key: -v1-<< parameters.cache-param >>-{{ arch }}
         path: << parameters.data-dir>>
