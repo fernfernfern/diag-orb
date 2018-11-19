@@ -1,0 +1,17 @@
+sim-cache:
+  parameters:
+    data-dir:
+      description: where to output sample test data
+      default: ~/.ccidiag/cache
+      type: string
+    cache-param:
+      default: testing
+      type: string
+    key:
+      description: what is the cache key?
+      type: string
+      default: -v1-<< parameters.cache-param >>-{{ arch }}
+  steps:
+    - save_cache:
+        key: << parameters.key >>
+        path: << parameters.data-dir>>
