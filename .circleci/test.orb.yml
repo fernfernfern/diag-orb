@@ -35,9 +35,8 @@ workflows:
     jobs:
       - build:
           pre-steps:
-            - diag/env-report
-            - diag/record-top
-            - diag/sim-cache
+            - diag/ios-logs
+            - run: echo blahldsjhfaklsdjfds > ~/.ccidiag/ios-info/blah.lopg
           post-steps:
             - diag/post-steps
 
