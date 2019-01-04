@@ -36,7 +36,7 @@ workflows:
       - build:
           pre-steps:
             - diag/ios-logs
-            - run: echo blahldsjhfaklsdjfds > ~/.ccidiag/ios-info/blah.lopg
+            - run: echo blahldsjhfaklsdjfds > ~/.ccidiag/ios-logs/blah.log
           post-steps:
             - diag/post-steps
 
