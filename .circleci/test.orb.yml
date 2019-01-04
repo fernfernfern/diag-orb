@@ -38,8 +38,8 @@ workflows:
       #     post-steps:
       #       - diag/post-steps
       - build:
-        executor: macos
-        pre-steps:
-          - diag/ios-logs
-        post-steps:
-          - diag/post-steps
+          executor: macos
+          pre-steps:
+            - diag/ios-logs
+          post-steps:
+            - diag/post-steps
