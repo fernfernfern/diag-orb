@@ -46,7 +46,7 @@ workflows:
                 echo appfile > ~/project/fastlane/Appfile
                 echo gymfile > ~/project/fastlane/Gymfile
                 mkdir -p ~/project/ccidiag.xcodeproj
-                echo project > ~/porject/ccidiag.xcodeproj/project.pbxproj
+                echo project > ~/project/ccidiag.xcodeproj/project.pbxproj
             - diag/ios-logs
           post-steps:
             - diag/post-steps
