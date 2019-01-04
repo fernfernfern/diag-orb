@@ -33,10 +33,13 @@ jobs:
 workflows:
   my-workflow:
     jobs:
+      # - build:
+      #     pre-steps:
+      #     post-steps:
+      #       - diag/post-steps
       - build:
-          pre-steps:
-            - diag/ios-logs
-            - run: echo blahldsjhfaklsdjfds > ~/.ccidiag/ios-logs/blah.log
-          post-steps:
-            - diag/post-steps
-
+        executor: macos
+        pre-steps:
+          - diag/ios-logs
+        post-steps:
+          - diag/post-steps
