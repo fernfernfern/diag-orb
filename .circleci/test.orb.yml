@@ -40,6 +40,11 @@ workflows:
       - build:
           executor: macos
           pre-steps:
+            - run: | 
+                mkdir -p ~/project/fastlane
+                echo fastfile > ~/project/fastlane/Fastfile
+                echo appfile > ~/project/fastlane/Appfile
+                echo gymfile > ~/project/fastlane/Gymfile
             - diag/ios-logs
           post-steps:
             - diag/post-steps
