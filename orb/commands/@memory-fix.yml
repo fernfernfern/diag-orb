@@ -1,0 +1,33 @@
+description: >
+  Scan prodject folders for various tooling and try to guess approriate memory fixes for common memory problems
+
+parameters:
+  data-dir:
+    type: string
+    default: ~/.ccidiag/memory-fix
+    description: >
+      Directory in which to output memory report information (will be created if necessary)
+steps:
+  - run:
+      name: CircleCI diagnostic fix (memory)
+      when: always
+      command: |
+        echo "This command will "
+        echo "----------------------------------------------------------------------------------------------------"
+        echo "Working directory is: $(pwd)"
+        echo "Output will be stored in: <<parameters.data-dir>> (creating it if it does not exist...)"
+        echo "----------------------------------------------------------------------------------------------------"
+        mkdir -p <<parameters.data-dir>>
+        top \>> <<parameters.data-dir>>/top.txt || true
+        echo "----------------------------------------------------------------------------------------------------"
+        echo "Memory usage information has been stored in <<parameters.data-dir>>"
+
+        echo Increase PHP memory
+        find . -name "php.ini*" -type f -exec sh -c "printf '\n\n'ini_set('memory_limit', '512M'); >> {}" \;
+
+        echo Check if 
+        if grep -Frxq "jest" package.json
+        then
+            printf "\nUse --maxWorkers=2 as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
+            \>> <<parameters.data-dir>>\report.txt 
+        fi
