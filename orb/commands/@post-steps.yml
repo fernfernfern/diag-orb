@@ -1,5 +1,0 @@
-post-steps:
-  steps:
-    - store_artifacts:
-        destination: ccidiag
-        path: ~/.ccidiag
