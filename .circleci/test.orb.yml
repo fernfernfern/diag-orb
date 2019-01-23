@@ -3,6 +3,11 @@ version: 2.1
 orbs:
   diag: fernfernfern/diag@dev:volatile
 
+commands:
+  simple:
+    steps:
+      - run: sleep 5
+
 executors:
   docker:
     parameters:
@@ -21,39 +26,39 @@ executors:
     machine: true
 
 jobs:
-  build:
-    parameters:
-      executor:
-        type: string
-        default: docker
-      iamge:
-        type: string
-        default: nodejs:latest
-    executor: << parameters.executor >>
-      tag: << parameters.tag >>
+  docker:
+    executor: docker
     steps:
-      - run: sleep 10
+      - diag/memory-fix
+      - diag/post-steps
+  macos:
+    executor: macos
+    steps:
+      - run: | 
+          mkdir -p ~/project/fastlane
+          echo fastfile > ~/project/fastlane/Fastfile
+          echo appfile > ~/project/fastlane/Appfile
+          echo gymfile > ~/project/fastlane/Gymfile
+          mkdir -p ~/project/ccidiag.xcodeproj
+          echo project > ~/project/ccidiag.xcodeproj/project.pbxproj
+      
+      - diag/ios-logs
+  machine:
+    executor: machine
+    steps:
+      - diag/env-info
+      - diag/memory
+      - diag/sample-data
+      - diag/simulate
 
 workflows:
   my-workflow:
     jobs:
       - build:
           executor: docker
-          image: nodejs
-          pre-steps:
-            - diag/memory-fix
-          post-steps:
-            - diag/post-steps
+
       - build:
           executor: macos
-          pre-steps:
-            - run: | 
-                mkdir -p ~/project/fastlane
-                echo fastfile > ~/project/fastlane/Fastfile
-                echo appfile > ~/project/fastlane/Appfile
-                echo gymfile > ~/project/fastlane/Gymfile
-                mkdir -p ~/project/ccidiag.xcodeproj
-                echo project > ~/project/ccidiag.xcodeproj/project.pbxproj
-            - diag/ios-logs
+
           post-steps:
             - diag/post-steps
