@@ -11,7 +11,7 @@ jobs:
     steps:
       - run: curl -fLSs https://circle.ci/cli | sudo bash
       - checkout
-      - run: circleci config pack orb | tee packed.yml
+      - run: circleci config pack src | tee packed.yml
       - store_artifacts:
           path: packed.yml
           destination: orb
