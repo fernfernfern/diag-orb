@@ -54,11 +54,6 @@ jobs:
 workflows:
   my-workflow:
     jobs:
-      - build:
-          executor: docker
-
-      - build:
-          executor: macos
-
-          post-steps:
-            - diag/post-steps
+      - docker
+      - macos
+      - machine
