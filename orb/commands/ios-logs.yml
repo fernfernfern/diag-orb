@@ -1,0 +1,5 @@
+steps:
+  - run: mkdir -p ~/.ccidiag/ios-logs
+  - run: echo export FL_OUTPUT_DIR=~/.ccidiag/ios-logs >> $BASH_ENV
+  - run: cp -R ~/project/fastlane ~/.ccidiag/ios-logs
+  - run: cp ~/project/*.xcodeproj/project.pbxproj ~/.ccidiag/ios-logs
