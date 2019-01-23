@@ -25,7 +25,6 @@ workflows:
   my-workflow:
     jobs:
       - build:
-          executor: docker
           pre-steps:
             - memory-fix
             - memory
