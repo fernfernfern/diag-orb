@@ -30,6 +30,4 @@ steps:
         then
             printf "\nUse --maxWorkers=2 as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
             \>> <<parameters.data-dir>>\report.txt 
-        else
-            # code if not found
         fi
