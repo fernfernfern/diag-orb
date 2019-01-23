@@ -26,7 +26,11 @@ jobs:
       executor:
         type: string
         default: docker
+      iamge:
+        type: string
+        default: nodejs:latest
     executor: << parameters.executor >>
+      tag: << parameters.tag >>
     steps:
       - run: sleep 10
 
@@ -34,7 +38,8 @@ workflows:
   my-workflow:
     jobs:
       - build:
-          executor: dcoker
+          executor: docker
+          image: nodejs
           pre-steps:
             - diag/memory-fix
           post-steps:
