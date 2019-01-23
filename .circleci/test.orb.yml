@@ -36,7 +36,7 @@ workflows:
       - build:
           executor: dcoker
           pre-steps:
-            - diag/memory-fix.yml
+            - diag/memory-fix
           post-steps:
             - diag/post-steps
       - build:
