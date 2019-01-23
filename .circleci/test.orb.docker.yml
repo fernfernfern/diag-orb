@@ -1,0 +1,33 @@
+version: 2.1
+
+orbs:
+  diag: fernfernfern/diag@dev:volatile
+
+executors:
+  docker:
+    parameters:
+      image:
+        type: string
+        default: python
+      tag:
+        type: string
+        default: latest
+    docker:
+      - image: circleci/<< parameters.image >>:<< parameters.tag >>
+
+jobs:
+  build:
+    executor: docker
+    steps:
+      - run: sleep 10
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          executor: docker
+          pre-steps:
+            - memory-fix
+            - memory
+          post-steps:
+            - diag/post-steps

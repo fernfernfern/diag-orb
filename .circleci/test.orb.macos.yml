@@ -1,0 +1,32 @@
+version: 2.1
+
+orbs:
+  diag: fernfernfern/diag@dev:volatile
+
+executors:
+  macos:
+    macos:
+      xcode: "10.1.0"
+
+jobs:
+  build:
+    executor: macos
+    steps:
+      - run: sleep 5
+
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          executor: macos
+          pre-steps:
+            - run: | 
+                mkdir -p ~/project/fastlane
+                echo fastfile > ~/project/fastlane/Fastfile
+                echo appfile > ~/project/fastlane/Appfile
+                echo gymfile > ~/project/fastlane/Gymfile
+                mkdir -p ~/project/ccidiag.xcodeproj
+                echo project > ~/project/ccidiag.xcodeproj/project.pbxproj
+            - diag/ios-logs
+          post-steps:
+            - diag/post-steps
