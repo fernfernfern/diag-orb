@@ -14,7 +14,7 @@ steps:
   - when:
       condition: <<parameters.test>>
       steps:
-        - run: echo package.json >> jest
+        - run: echo jest >> package.json
   - run:
       name: CircleCI diagnostic fix (memory)
       when: always
