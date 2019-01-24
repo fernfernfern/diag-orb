@@ -11,7 +11,7 @@ parameters:
     type: boolean
     default: false
   java-max:
-    type: string
+    type: integer
     default: 3
 steps:
   - when:
