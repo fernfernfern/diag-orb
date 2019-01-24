@@ -27,6 +27,7 @@ workflows:
       - build:
           pre-steps:
             - diag/memory-fix
+                test: true
             - diag/memory
           post-steps:
             - diag/post-steps
