@@ -17,7 +17,7 @@ steps:
   - when:
       condition: <<parameters.test>>
       steps:
-        - run: echo jest >> package.json
+        - run: echo jest >> package.json && echo APP_NAME >> gradlew
   - run:
       name: CircleCI diagnostic fix (memory)
       when: always
@@ -45,10 +45,17 @@ steps:
         echo Start with the default
         echo export _JAVA_OPTIONS=-Xmx<<parameter.java-max>>g -Xms1g
 
-        echo Check if gradle is being used
+        echo Check if maven is being used
         if grep -Frxq "project" pom.xml
         then
-            printf "\nUse --no-daemon as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
+            printf "\nUse " \
+            \>> <<parameters.data-dir>>/report.txt 
+        fi
+
+        echo Check if gradle is being used
+        if grep -Frxq "APP_NAME" gradlew
+        then
+            printf "\nUse --no-daemon as a CLI parameter to gradlew https://docs.gradle.org/current/userguide/gradle_daemon.html#sec:why_the_daemon\n" \
             \>> <<parameters.data-dir>>/report.txt 
         fi
   - when:
