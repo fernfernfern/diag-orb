@@ -54,4 +54,4 @@ steps:
   - when:
       condition: <<parameters.test>>
       steps:
-        - run: finish tests
+        - run: echo finish tests
