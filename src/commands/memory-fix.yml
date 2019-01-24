@@ -10,6 +10,9 @@ parameters:
   test:
     type: boolean
     default: false
+  java-max:
+    type: string
+    default: 3
 steps:
   - when:
       condition: <<parameters.test>>
@@ -38,3 +41,17 @@ steps:
             printf "\nUse --maxWorkers=2 as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
             \>> <<parameters.data-dir>>/report.txt 
         fi
+
+        echo Start with the default
+        echo export _JAVA_OPTIONS=-Xmx<<parameter.java-max>>g -Xms1g
+
+        echo Check if gradle is being used
+        if grep -Frxq "project" pom.xml
+        then
+            printf "\nUse --no-daemon as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
+            \>> <<parameters.data-dir>>/report.txt 
+        fi
+  - when:
+      condition: <<parameters.test>>
+      steps:
+        - run: finish tests
