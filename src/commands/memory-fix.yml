@@ -36,5 +36,5 @@ steps:
         if grep -Frxq "jest" package.json
         then
             printf "\nUse --maxWorkers=2 as a CLI parameter to jest https://jestjs.io/docs/en/cli.html#maxworkers-num\n" \
-            \>> <<parameters.data-dir>>\\report.txt 
+            \>> <<parameters.data-dir>>/report.txt 
         fi
