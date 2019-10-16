@@ -32,12 +32,12 @@ workflows:
 The commands below are indended to be added as `pre-steps` for jobs you'd like to investigate.
 
 ### diag/env-report
-Generate a report of various kinds of enviroment information. Helpful to find out what packages are install in the enviroment.
+Generate a report of various kinds of enviroment information. Helpful to find out what packages are installed in the enviroment.
 
 ### diag/record-top
-Start top as a background process that appends output to a file. Helpful to see memory consumption and process lifecycle over the duration of a job
+Start top as a background process that appends output to a file. Helpful to see memory consumption and process lifecycle over the duration of a job.
 
-### daig/sample-test-data
+### diag/sample-test-data
 Create sample test junit output for Test Summary report. Helpful if you want to sanity check if test data collection is working. Pass `upload: true` to have it automatically run `store_test_results`.
 
 ```yaml
